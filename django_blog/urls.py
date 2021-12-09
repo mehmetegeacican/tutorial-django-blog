@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users import views as user_views
-
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("djblog.urls")),
-    path('sign_up/',user_views.sign_up, name="signup")
+    path('sign_up/',user_views.sign_up, name="signup"),
+    path('sign_in/',auth_views.LoginView.as_view(template_name = "users/sign_in.html"), name="signin"),
+    path('profile/',user_views.profile, name="profile"),
+    path('sign_out/',auth_views.LogoutView.as_view(template_name = "users/sign_out.html"), name="signout"),
+
 ]
